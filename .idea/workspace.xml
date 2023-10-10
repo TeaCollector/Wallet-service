@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Add javadoc.">
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Configure build.gradle and fix readme.md">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +148,7 @@
       <workItem from="1696873377582" duration="5110000" />
       <workItem from="1696910619989" duration="1213000" />
       <workItem from="1696931892825" duration="6045000" />
-      <workItem from="1696942439455" duration="323000" />
+      <workItem from="1696942439455" duration="1371000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1696657050549</created>
@@ -170,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696923629341</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Configure build.gradle and fix readme.md">
+      <created>1696942979467</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696942979467</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +211,7 @@
     <MESSAGE value="Initial commit." />
     <MESSAGE value="Create new branch and first commit" />
     <MESSAGE value="Add javadoc." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add javadoc." />
+    <MESSAGE value="Configure build.gradle and fix readme.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Configure build.gradle and fix readme.md" />
   </component>
 </project>
