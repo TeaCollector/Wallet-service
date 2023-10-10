@@ -21,6 +21,12 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
 
+    /**
+     * Main method enter point to application.
+     * @param args nothing
+     * @throws IOException
+     * @throws UserNotFoundException
+     */
     public static void main(String[] args) throws IOException, UserNotFoundException {
         InputStream<BufferedReader> input = new ConsoleInputStream();
         OutputStream output = new ConsoleOutputStream();

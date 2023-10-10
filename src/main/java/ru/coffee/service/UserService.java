@@ -6,6 +6,10 @@ import ru.coffee.exception.UserNotFoundException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+/**
+ * Service with base action for repository.
+ */
+
 public interface UserService {
 
     void addUser(User user);

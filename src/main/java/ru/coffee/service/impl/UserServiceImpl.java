@@ -13,6 +13,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class.getName());
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -20,31 +21,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
+        logger.info("Adding {}", user.getName());
         userRepository.addUser(user);
     }
 
     @Override
     public void addMoney(User user, String token, BigDecimal money) throws UserNotFoundException {
+        logger.info("Adding money for {} amount {}", user.getName(), money);
         userRepository.addMoney(user, token, money);
     }
 
     @Override
     public void withdraw(User user, String token, BigDecimal money) throws UserNotFoundException {
+        logger.info("Withdraw money for {} amount {}", user.getName(), money);
         userRepository.withdraw(user, token, money);
     }
 
     @Override
     public Optional<User> findUser(User user) {
+        logger.info("Trying to find {}", user.getName());
         return userRepository.findUser(user);
     }
 
     @Override
     public void addTransactionId(String id) {
+        logger.info("Adding transaction at db");
         userRepository.saveTransactionId(id);
     }
 
     @Override
     public void history(User user) {
+        logger.info("Show history {}", user.getName());
         userRepository.history(user);
     }
 }

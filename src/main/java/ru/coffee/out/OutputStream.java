@@ -1,5 +1,10 @@
 package ru.coffee.out;
 
-public interface OutputStream {
-    void output(String output);
+
+/**
+ * Main interface to output stream
+ * @param <T> type of output stream
+ */
+public interface OutputStream<T> {
+    void output(T output);
 }

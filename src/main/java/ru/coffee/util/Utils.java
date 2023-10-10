@@ -10,18 +10,28 @@ import ru.coffee.service.UserService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
+
+/**
+ * Util class for additional action with user
+ */
 public class Utils {
     private final UserService userService;
-    private final OutputStream output;
+    private final OutputStream<String> output;
     private static final Logger logger = LogManager.getLogger(Utils.class.getName());
 
-    public Utils(UserService userService, OutputStream output) {
+    public Utils(UserService userService, OutputStream<String> output) {
         this.userService = userService;
         this.output = output;
     }
 
+    /**
+     * @param br console input
+     * @return user which was created
+     * @throws IOException
+     */
     public User createUser(BufferedReader br) throws IOException {
         User user = new User();
         String inputString;
@@ -37,29 +47,39 @@ public class Utils {
         return user;
     }
 
-    public boolean authentication(BufferedReader br) throws IOException {
+
+    /**
+     * @param br console input
+     * @return true if user is present in db otherwise false
+     * @throws IOException
+     */
+    public Optional<User> authentication(BufferedReader br) throws IOException {
         logger.debug("Begin authentication.");
-        String data;
+        String consoleInput;
         User userForChecking = new User();
         output.output("\nPlease sign in. \nEnter name: ");
-        data = br.readLine();
-        userForChecking.setName(data);
+        consoleInput = br.readLine();
+        userForChecking.setName(consoleInput);
         output.output("Enter password: ");
-        data = br.readLine();
-        userForChecking.setPassword(data);
+        consoleInput = br.readLine();
+        userForChecking.setPassword(consoleInput);
         if (userService.findUser(userForChecking).isEmpty()) {
             try {
                 logger.warn("{} was input by client.", userForChecking.getName());
                 throw new UserNotFoundException("User not found");
             } catch (UserNotFoundException e) {
                 output.output("You input incorrect user name or password.");
-                return false;
+                return Optional.empty();
             }
         }
         logger.info("Authentication for {} was applied.", userForChecking.getName());
-        return true;
+        return Optional.of(userService.findUser(userForChecking).get());
     }
 
+    /**
+     * Method for creating uniq UUID
+     * @return uniq UUID
+     */
     public String createUUID() {
         return UUID.randomUUID().toString();
     }

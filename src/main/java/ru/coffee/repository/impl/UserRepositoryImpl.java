@@ -14,6 +14,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * User repository implementation
+ */
 public class UserRepositoryImpl implements UserRepository {
 
     private final Logger logger = LogManager.getLogger(UserRepositoryImpl.class.getName());
@@ -41,9 +44,9 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public void withdraw(User user, String transactionId, BigDecimal money) {
+    public void withdraw(User user, String id, BigDecimal money) {
         logger.info("{} trying to withdraw {}", user.getName(), money);
-        boolean correctToken = correctTransaction(transactionId);
+        boolean correctToken = correctTransaction(id);
         if (!correctToken) {
             try {
                 throw new NotUniqTransactionException("Wrong transaction id.");
@@ -75,9 +78,9 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public void addMoney(User user, String token, BigDecimal money) {
+    public void addMoney(User user, String id, BigDecimal money) {
         logger.info("{} trying to add {}", user.getName(), money);
-        boolean correctToken = correctTransaction(token);
+        boolean correctToken = correctTransaction(id);
         if (!correctToken) {
             try {
                 throw new NotUniqTransactionException("Wrong id transaction.");
@@ -118,15 +121,26 @@ public class UserRepositoryImpl implements UserRepository {
         for (Map.Entry<User, List<OperationDetail>> detail : operationDetailList.entrySet()) {
             if (detail.getKey().getName().equals(user.getName()) &&
                 detail.getKey().getPassword().equals(user.getPassword())) {
-                output.output("User '" + detail.getKey().getName() + "': " + detail.getValue());
+                output.output("User '" + detail.getKey().getName() + "': " + detail.getValue() + "\n");
             }
         }
     }
 
+    /**
+     *
+     * @param id uniq transaction id
+     * @return true if the same transaction was find, otherwise false
+     */
     public boolean correctTransaction(String id) {
         return transactionList.contains(id);
     }
 
+
+    /**
+     * For save operation detail at db
+     * @param user which make action
+     * @param action action withdraw or add money
+     */
     private void addOperationDetails(User user, BigDecimal action) {
         OperationDetail operationDetail = new OperationDetail();
         operationDetail.setAction(action);
