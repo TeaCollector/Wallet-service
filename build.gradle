@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
 }
-//apply plugin: 'application'
 mainClassName = 'ru.coffee.Main'
 
 repositories {
@@ -28,11 +27,6 @@ jar {
     archiveVersion = '1.0'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'ru.coffee.Main'
-    }
-}
 run {
     standardInput = System.in
 }
