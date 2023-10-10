@@ -1,9 +1,9 @@
 plugins {
     id 'java'
+    id 'application'
 }
-
-group 'ru.coffee'
-version '1.0-SNAPSHOT'
+//apply plugin: 'application'
+mainClassName = 'ru.coffee.Main'
 
 repositories {
     mavenCentral()
@@ -16,12 +16,23 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
-    implementation 'org.apache.logging.log4j:log4j-core:3.0.0-alpha1'
     implementation 'org.apache.logging.log4j:log4j-api:3.0.0-alpha1'
-
-
+    implementation 'org.apache.logging.log4j:log4j-core:3.0.0-alpha1'
 }
 
 test {
     useJUnitPlatform()
+}
+jar {
+    archiveBaseName = 'ws'
+    archiveVersion = '1.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.coffee.Main'
+    }
+}
+run {
+    standardInput = System.in
 }

@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Create new branch and first commit">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/domain/OperationDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/domain/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/exception/NotEnoughMoneyException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/exception/NotUniqTransactionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/exception/UserNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/in/InputStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/in/impl/ConsoleInputStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/out/OutputStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/out/impl/ConsoleOutputStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/util/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Add javadoc.">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +20,31 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="wallet-service" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="wallet-service" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -71,7 +79,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -84,7 +93,7 @@
       <recent name="ru.coffee.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.wallet-service [jar]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.coffee.Main" />
       <module name="wallet-service.main" />
@@ -98,8 +107,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="wallet-service [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.wallet-service [jar]" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -119,6 +150,7 @@
       <workItem from="1696846650380" duration="15289000" />
       <workItem from="1696873377582" duration="5110000" />
       <workItem from="1696910619989" duration="1213000" />
+      <workItem from="1696931892825" duration="6045000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1696657050549</created>
@@ -134,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696657242936</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add javadoc.">
+      <created>1696923629341</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696923629341</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +205,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit." />
     <MESSAGE value="Create new branch and first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create new branch and first commit" />
+    <MESSAGE value="Add javadoc." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add javadoc." />
   </component>
 </project>

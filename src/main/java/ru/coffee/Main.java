@@ -29,7 +29,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException, UserNotFoundException {
         InputStream<BufferedReader> input = new ConsoleInputStream();
-        OutputStream output = new ConsoleOutputStream();
+        OutputStream<String> output = new ConsoleOutputStream();
         UserRepository userRepository = new UserRepositoryImpl(output);
         UserService userService = new UserServiceImpl(userRepository);
         Utils tokenCreator = new Utils(userService, output);
