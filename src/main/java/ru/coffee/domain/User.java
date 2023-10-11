@@ -8,6 +8,8 @@ import java.math.BigDecimal;
  * Basic users with name, password and certain amount
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     private String name;
     private String password;

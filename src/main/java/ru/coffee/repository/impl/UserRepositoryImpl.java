@@ -20,12 +20,12 @@ import java.util.*;
 public class UserRepositoryImpl implements UserRepository {
 
     private final Logger logger = LogManager.getLogger(UserRepositoryImpl.class.getName());
-    private final OutputStream output;
+    private final OutputStream<String> output;
     private final List<User> userList = new ArrayList<>();
     private final List<String> transactionList = new ArrayList<>();
     private final Map<User, List<OperationDetail>> operationDetailList = new HashMap<>();
 
-    public UserRepositoryImpl(OutputStream output) {
+    public UserRepositoryImpl(OutputStream<String> output) {
         this.output = output;
     }
 
