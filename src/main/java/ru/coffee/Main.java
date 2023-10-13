@@ -21,6 +21,10 @@ import ru.coffee.util.Utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * Main class consist main method it's application's entry point
+ */
+
 public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -32,6 +36,7 @@ public class Main {
      * @throws UserNotFoundException
      */
     public static void main(String[] args) throws IOException, UserNotFoundException {
+
         InputStream<BufferedReader> input = new ConsoleInputStream();
         OutputStream<String> output = new ConsoleOutputStream();
         UserRepository userRepository = new UserRepositoryImpl(output);

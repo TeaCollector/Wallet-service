@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Divide transaction and user logic.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/TransactionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/TransactionRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/TransactionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/TransactionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +241,7 @@
       <workItem from="1697020133192" duration="3768000" />
       <workItem from="1697094265075" duration="9460000" />
       <workItem from="1697111320684" duration="389000" />
-      <workItem from="1697172924397" duration="2412000" />
+      <workItem from="1697172924397" duration="2746000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1696657050549</created>
@@ -289,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697022992378</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Divide transaction and user logic.">
+      <created>1697175381167</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697175381167</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
