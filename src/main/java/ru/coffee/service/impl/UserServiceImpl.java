@@ -26,27 +26,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addMoney(User user, String token, BigDecimal money) throws UserNotFoundException {
+    public void addMoney(User user, BigDecimal money) throws UserNotFoundException {
         logger.info("Adding money for {} amount {}", user.getName(), money);
-        userRepository.addMoney(user, token, money);
+        userRepository.addMoney(user, money);
     }
 
     @Override
-    public void withdraw(User user, String token, BigDecimal money) throws UserNotFoundException {
+    public void withdraw(User user, BigDecimal money) throws UserNotFoundException {
         logger.info("Withdraw money for {} amount {}", user.getName(), money);
-        userRepository.withdraw(user, token, money);
+        userRepository.withdraw(user, money);
     }
 
     @Override
     public Optional<User> findUser(User user) {
         logger.info("Trying to find {}", user.getName());
         return userRepository.findUser(user);
-    }
-
-    @Override
-    public void addTransactionId(String id) {
-        logger.info("Adding transaction at db");
-        userRepository.saveTransactionId(id);
     }
 
     @Override

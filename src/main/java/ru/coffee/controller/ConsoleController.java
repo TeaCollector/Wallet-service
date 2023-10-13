@@ -6,6 +6,7 @@ import ru.coffee.domain.User;
 import ru.coffee.exception.UserNotFoundException;
 import ru.coffee.in.InputStream;
 import ru.coffee.out.OutputStream;
+import ru.coffee.service.TransactionService;
 import ru.coffee.service.UserService;
 import ru.coffee.util.Utils;
 
@@ -20,6 +21,8 @@ import java.util.Optional;
  * Controller for all action in application.
  */
 public class ConsoleController {
+
+    private final TransactionService transactionService;
     private final UserService userService;
     private final InputStream<BufferedReader> input;
     private final OutputStream<String> output;
@@ -27,15 +30,17 @@ public class ConsoleController {
     private static final Logger logger = LogManager.getLogger(ConsoleController.class.getName());
 
     /**
-     * @param userService need to receive message and send to other layer
-     * @param input       input stream in our case from console
-     * @param output      output stream output to console
-     * @param utils       additional tool for authentication and create user
+     * @param transactionService for transaction action
+     * @param userService        need to receive message and send to other layer
+     * @param input              input stream in our case from console
+     * @param output             output stream output to console
+     * @param utils              additional tool for authentication and create user
      */
-    public ConsoleController(UserService userService,
+    public ConsoleController(TransactionService transactionService, UserService userService,
                              InputStream<BufferedReader> input,
                              OutputStream<String> output,
                              Utils utils) {
+        this.transactionService = transactionService;
         this.userService = userService;
         this.input = input;
         this.output = output;
@@ -99,13 +104,17 @@ public class ConsoleController {
             String action = br.readLine();
             if (action.charAt(0) == '+') {
                 String transactionId = utils.createUUID();
-                userService.addTransactionId(transactionId);
-                userService.addMoney(user, transactionId, new BigDecimal(action));
+                if (transactionService.validTransaction(transactionId)) {
+                    transactionService.addTransaction(transactionId);
+                } else continue;
+                userService.addMoney(user, new BigDecimal(action));
                 output.output("\nYour balance: " + user.getBalance().setScale(4, RoundingMode.CEILING) + "\n");
             } else if (action.charAt(0) == '-') {
                 String transactionId = utils.createUUID();
-                userService.addTransactionId(transactionId);
-                userService.withdraw(user, transactionId, new BigDecimal(action));
+                if (transactionService.validTransaction(transactionId)) {
+                    transactionService.addTransaction(transactionId);
+                } else continue;
+                userService.withdraw(user, new BigDecimal(action));
                 output.output("\nYour balance: " + user.getBalance().setScale(4, RoundingMode.CEILING) + "\n");
             } else if (action.equals("history")) {
                 userService.history(user);

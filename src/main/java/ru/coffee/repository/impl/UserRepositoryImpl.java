@@ -22,7 +22,6 @@ public class UserRepositoryImpl implements UserRepository {
     private final Logger logger = LogManager.getLogger(UserRepositoryImpl.class.getName());
     private final OutputStream<String> output;
     private final List<User> userList = new ArrayList<>();
-    private final List<String> transactionList = new ArrayList<>();
     private final Map<User, List<OperationDetail>> operationDetailList = new HashMap<>();
 
     public UserRepositoryImpl(OutputStream<String> output) {
@@ -35,27 +34,10 @@ public class UserRepositoryImpl implements UserRepository {
         logger.info("{} was added at database", user.getName());
     }
 
-    @Override
-    public void saveTransactionId(String id) {
-        transactionList.add(id);
-        logger.info("Transaction with id {} was added at database", id);
-
-    }
-
 
     @Override
-    public void withdraw(User user, String id, BigDecimal money) {
+    public void withdraw(User user, BigDecimal money) {
         logger.info("{} trying to withdraw {}", user.getName(), money);
-        boolean correctToken = correctTransaction(id);
-        if (!correctToken) {
-            try {
-                throw new NotUniqTransactionException("Wrong transaction id.");
-            } catch (NotUniqTransactionException e) {
-                logger.error("Transaction was not uniq", e.getCause());
-                output.output("You input wrong transaction transactionId.");
-                return;
-            }
-        }
         Optional<User> userToWithdrawMoney = findUser(user);
         User userFromOptional = userToWithdrawMoney.get();
         BigDecimal withDrawMoney = money.negate();
@@ -78,18 +60,8 @@ public class UserRepositoryImpl implements UserRepository {
 
 
     @Override
-    public void addMoney(User user, String id, BigDecimal money) {
+    public void addMoney(User user, BigDecimal money) {
         logger.info("{} trying to add {}", user.getName(), money);
-        boolean correctToken = correctTransaction(id);
-        if (!correctToken) {
-            try {
-                throw new NotUniqTransactionException("Wrong id transaction.");
-            } catch (NotUniqTransactionException e) {
-                logger.error("Transaction was not uniq", e.getCause());
-                output.output("Sorry, transaction id is not uniq, try again.");
-                return;
-            }
-        }
         Optional<User> optionalUser = findUser(user);
         User userFromOptional = optionalUser.get();
         userList.remove(userFromOptional);
@@ -115,6 +87,10 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.empty();
     }
 
+    /**
+     * Show all user's history
+     * @param user on which we will show his history operation
+     */
     @Override
     public void history(User user) {
         logger.info("{} request his history of operation.", user.getName());
@@ -125,16 +101,6 @@ public class UserRepositoryImpl implements UserRepository {
             }
         }
     }
-
-    /**
-     *
-     * @param id uniq transaction id
-     * @return true if the same transaction was find, otherwise false
-     */
-    public boolean correctTransaction(String id) {
-        return transactionList.contains(id);
-    }
-
 
     /**
      * For save operation detail at db

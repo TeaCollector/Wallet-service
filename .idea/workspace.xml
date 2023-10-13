@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Configure build.gradle and fix readme.md">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/controller/ConsoleControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/repository/impl/UserRepositoryImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/util/UtilsTest.java" afterDir="false" />
+    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Divide transaction and user logic.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/TransactionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/TransactionRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/TransactionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/TransactionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +56,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -112,75 +115,19 @@
       <recent name="ru.coffee.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserServiceImplTest.addUser (1)">
-    <configuration name="UserRepositoryImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.coffee.repository.impl.UserRepositoryImplTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="UserRepositoryImplTest.CorrectTransaction_InputTransaction_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.coffee.repository.impl.UserRepositoryImplTest.CorrectTransaction_InputTransaction_Success&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="UserRepositoryImplTest.findUser_createSomeUser_SuccessFind" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;ru.coffee.repository.impl.UserRepositoryImplTest.findUser_createSomeUser_SuccessFind&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.coffee.Main" />
+      <module name="wallet-service.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.coffee.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="UserServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -196,6 +143,29 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;ru.coffee.service.impl.UserServiceImplTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceImplTest.addTransactionId" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.coffee.service.impl.UserServiceImplTest.addTransactionId&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -228,13 +198,36 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="UserServiceImplTest.history" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.coffee.service.impl.UserServiceImplTest.history&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.UserServiceImplTest.addUser (1)" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.UserServiceImplTest" />
-        <item itemvalue="Gradle.UserRepositoryImplTest.CorrectTransaction_InputTransaction_Success" />
-        <item itemvalue="Gradle.UserRepositoryImplTest" />
-        <item itemvalue="Gradle.UserRepositoryImplTest.findUser_createSomeUser_SuccessFind" />
+        <item itemvalue="Gradle.UserServiceImplTest.history" />
+        <item itemvalue="Gradle.UserServiceImplTest.addTransactionId" />
+        <item itemvalue="Gradle.UserServiceImplTest.addUser (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +249,10 @@
       <workItem from="1696931892825" duration="6045000" />
       <workItem from="1696942439455" duration="1371000" />
       <workItem from="1696999899277" duration="11662000" />
-      <workItem from="1697020133192" duration="2587000" />
+      <workItem from="1697020133192" duration="3768000" />
+      <workItem from="1697094265075" duration="9460000" />
+      <workItem from="1697111320684" duration="389000" />
+      <workItem from="1697172924397" duration="2412000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1696657050549</created>
@@ -286,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696942979467</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add test on repository">
+      <created>1697022992378</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1697022992378</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +323,8 @@
     <MESSAGE value="Create new branch and first commit" />
     <MESSAGE value="Add javadoc." />
     <MESSAGE value="Configure build.gradle and fix readme.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Configure build.gradle and fix readme.md" />
+    <MESSAGE value="Add test on repository" />
+    <MESSAGE value="Divide transaction and user logic." />
+    <option name="LAST_COMMIT_MESSAGE" value="Divide transaction and user logic." />
   </component>
 </project>
