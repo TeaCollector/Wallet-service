@@ -9,14 +9,14 @@
                 schemaName="wallet">
             <column name="operation_id" value="1"/>
             <column name="operation_time" value="13:45:30"/>
-            <column name="action" value="-300"/>
+            <column name="action" value="Registration"/>
         </insert>
 
         <insert tableName="operation_detail"
                 schemaName="wallet">
             <column name="operation_id" value="2"/>
             <column name="operation_time" value="22:45:05"/>
-            <column name="action" value="136"/>
+            <column name="action" value="Registration"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

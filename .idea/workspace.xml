@@ -4,31 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="Add some javadocs at main class">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryBD.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/changelog-master.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/liquibase.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/changelog.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-schema-wallet.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-sequence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-operation_detail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-transaction.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-operation_detail.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-transaction.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/db.properties" afterDir="false" />
+    <list default="true" id="4295fb85-9e6d-4739-ab2b-2f712e5a0dfc" name="Changes" comment="create new branch resolve second HW.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/TransactionRepositoryBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/TransactionRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/TransactionRepositoryLocal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryLocal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/util/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/coffee/repository/impl/UserRepositoryImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/repository/impl/UserRepositoryLocalTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/service/impl/UserServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/controller/ConsoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/repository/impl/UserRepositoryLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/coffee/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/coffee/util/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/liquibase.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-schema-wallet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-schema-wallet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-sequence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-sequence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-operation_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-operation_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-transaction.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-transaction.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/create-table-user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-operation_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-operation_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-transaction.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-transaction.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/v1.0.0/insert-into-user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/coffee/util/UtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/coffee/util/UtilTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +83,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2WQF6peuxJzKswj6KI4wp6DLWqw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -103,9 +100,10 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.22439587&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -247,11 +245,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Gradle.UserServiceImplTest.AddTransactionId_Success (1)" />
         <item itemvalue="Gradle.UserServiceImplTest.history" />
         <item itemvalue="Gradle.UserServiceImplTest.addUser (1)" />
+        <item itemvalue="Gradle.UserServiceImplTest.AddTransactionId_Success (1)" />
         <item itemvalue="Gradle.UserServiceImplTest.addTransactionId" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -284,7 +282,9 @@
       <workItem from="1697617819453" duration="3775000" />
       <workItem from="1697692319803" duration="949000" />
       <workItem from="1697789859724" duration="1496000" />
-      <workItem from="1698043705913" duration="786000" />
+      <workItem from="1698043705913" duration="7460000" />
+      <workItem from="1698052179784" duration="10049000" />
+      <workItem from="1698084380067" duration="2007000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit.">
       <created>1696657050549</created>
@@ -328,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697175381167</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="create new branch resolve second HW.">
+      <created>1698044577657</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698044577657</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,6 +371,7 @@
     <MESSAGE value="Configure build.gradle and fix readme.md" />
     <MESSAGE value="Add test on repository" />
     <MESSAGE value="Divide transaction and user logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Divide transaction and user logic." />
+    <MESSAGE value="create new branch resolve second HW." />
+    <option name="LAST_COMMIT_MESSAGE" value="create new branch resolve second HW." />
   </component>
 </project>

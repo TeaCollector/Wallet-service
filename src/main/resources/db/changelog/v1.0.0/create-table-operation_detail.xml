@@ -11,10 +11,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="operation_time" type="VARCHAR(10)"/>
-            <column name="action" type="BIGINT"/>
+            <column name="action" type="VARCHAR(15)"/>
         </createTable>
 
         <addForeignKeyConstraint
+                baseTableSchemaName="wallet"
                 referencedTableSchemaName="wallet"
                 baseTableName="user"
                 baseColumnNames="operation_id"

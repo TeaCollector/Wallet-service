@@ -11,7 +11,7 @@
                         incrementBy="1"
                         minValue="1"
                         maxValue="400000"
-                        startValue="1"
+                        startValue="3"
                         />
         <createSequence sequenceName="seq_transaction_id"
                         schemaName="wallet"
@@ -19,7 +19,7 @@
                         incrementBy="1"
                         minValue="1"
                         maxValue="4000"
-                        startValue="1"
+                        startValue="3"
         />
         <createSequence sequenceName="seq_operation_detail_id"
                         schemaName="wallet"
@@ -27,7 +27,7 @@
                         incrementBy="1"
                         minValue="1"
                         maxValue="400000"
-                        startValue="1"
+                        startValue="3"
         />
     </changeSet>
 

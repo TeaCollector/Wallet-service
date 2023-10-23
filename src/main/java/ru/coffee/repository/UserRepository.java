@@ -41,4 +41,9 @@ public interface UserRepository {
      * @param user on which we will show his history operation
      */
     void history(User user);
+
+    /**
+     * return current money of user
+     */
+    String currentAmount(User user);
 }

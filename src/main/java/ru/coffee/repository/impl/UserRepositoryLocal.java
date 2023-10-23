@@ -101,6 +101,11 @@ public class UserRepositoryLocal implements UserRepository {
         }
     }
 
+    @Override
+    public String currentAmount(User user) {
+        return null;
+    }
+
     /**
      * For save operation detail at db
      * @param user which make action

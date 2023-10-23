@@ -5,18 +5,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
     <changeSet id="008-insert-into-transaction" author="Alexandr_Sergeev">
-        <insert tableName="operation_detail"
+        <insert tableName="transaction"
                 schemaName="wallet">
-            <column name="operation_id" value="1"/>
-            <column name="operation_time" value="13:45:30"/>
-            <column name="action" value="-300"/>
+            <column name="transaction_id" value="1"/>
+            <column name="transaction" value="2345-dfg-23g"/>
         </insert>
-
-        <insert tableName="operation_detail"
+        <insert tableName="transaction"
                 schemaName="wallet">
-            <column name="operation_id" value="2"/>
-            <column name="operation_time" value="22:45:05"/>
-            <column name="action" value="136"/>
+            <column name="transaction_id" value="2"/>
+            <column name="transaction" value="dfsd-45gh-234t"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

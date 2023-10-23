@@ -7,10 +7,10 @@
     <changeSet id="003-create-table-transaction" author="Alexandr_Sergeev">
         <createTable tableName="transaction"
                      schemaName="wallet">
-            <column name="id" type="BIGINT">
+            <column name="transaction_id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="transaction" type="VARCHAR(20)">
+            <column name="transaction" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -8,7 +8,7 @@ import ru.coffee.in.InputStream;
 import ru.coffee.out.OutputStream;
 import ru.coffee.service.TransactionService;
 import ru.coffee.service.UserService;
-import ru.coffee.util.Utils;
+import ru.coffee.util.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class ConsoleController {
     private final UserService userService;
     private final InputStream<BufferedReader> input;
     private final OutputStream<String> output;
-    private final Utils utils;
+    private final Util util;
     private static final Logger logger = LogManager.getLogger(ConsoleController.class.getName());
 
     /**
@@ -34,17 +34,17 @@ public class ConsoleController {
      * @param userService        need to receive message and send to other layer
      * @param input              input stream in our case from console
      * @param output             output stream output to console
-     * @param utils              additional tool for authentication and create user
+     * @param util              additional tool for authentication and create user
      */
     public ConsoleController(TransactionService transactionService, UserService userService,
                              InputStream<BufferedReader> input,
                              OutputStream<String> output,
-                             Utils utils) {
+                             Util util) {
         this.transactionService = transactionService;
         this.userService = userService;
         this.input = input;
         this.output = output;
-        this.utils = utils;
+        this.util = util;
     }
 
     /**
@@ -59,10 +59,10 @@ public class ConsoleController {
             User user = new User();
             int option = Integer.parseInt(br.readLine());
             if (option == 1) {
-                user = utils.createUser(br);
+                user = util.createUser(br);
                 userService.addUser(user);
                 while (true) {
-                    Optional<User> userOptional = utils.authentication(br);
+                    Optional<User> userOptional = util.authentication(br);
                     if (userOptional.isPresent()) {
                         user = userOptional.get();
                         break;
@@ -70,7 +70,7 @@ public class ConsoleController {
                 }
             } else if (option == 2) {
                 while (true) {
-                    Optional<User> userOptional = utils.authentication(br);
+                    Optional<User> userOptional = util.authentication(br);
                     if (userOptional.isPresent()) {
                         user = userOptional.get();
                         break;
@@ -84,7 +84,7 @@ public class ConsoleController {
                           "for example input: '+1000' this mean you add 1000$ to yourself.  \n" +
                           "Or input: '-300' you withdraw 300$\n" +
                           "If you want to exit from account print: 'exit'\n" +
-                          "For quit from application print 'quit'" +
+                          "For quit from application print 'quit'\n" +
                           "Have fun! \n" +
                           "\n");
 
@@ -103,14 +103,14 @@ public class ConsoleController {
             output.output("Input here: ");
             String action = br.readLine();
             if (action.charAt(0) == '+') {
-                String transactionId = utils.createUUID();
+                String transactionId = util.createUUID();
                 if (transactionService.validTransaction(transactionId)) {
                     transactionService.addTransaction(transactionId);
                 } else continue;
                 userService.addMoney(user, new BigDecimal(action));
                 output.output("\nYour balance: " + user.getBalance().setScale(4, RoundingMode.CEILING) + "\n");
             } else if (action.charAt(0) == '-') {
-                String transactionId = utils.createUUID();
+                String transactionId = util.createUUID();
                 if (transactionService.validTransaction(transactionId)) {
                     transactionService.addTransaction(transactionId);
                 } else continue;

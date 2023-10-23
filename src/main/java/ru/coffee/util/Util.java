@@ -30,12 +30,14 @@ import java.util.UUID;
  * Util class for additional action with user
  */
 
-public class Utils {
+public class Util {
+
     private final UserService userService;
     private final OutputStream<String> output;
-    private static final Logger logger = LogManager.getLogger(Utils.class.getName());
+    private static final Logger logger = LogManager.getLogger(Util.class.getName());
 
-    public Utils(UserService userService, OutputStream<String> output) {
+
+    public Util(UserService userService, OutputStream<String> output) {
         this.userService = userService;
         this.output = output;
     }
@@ -89,34 +91,6 @@ public class Utils {
         return Optional.of(userService.findUser(userForChecking).get());
     }
 
-    public Connection getConnection() throws LiquibaseException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream("src/main/resources/db/db.properties")) {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String url = properties.getProperty("postgres.url");
-        String username = properties.getProperty("postgres.username");
-        String password = properties.getProperty("postgres.password");
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        Database database = null;
-        try {
-            database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }
-        Liquibase liquibase = new Liquibase("db/changelog/changelog-master.xml",
-                new ClassLoaderResourceAccessor(), database);
-        liquibase.dropAll();
-        liquibase.update("");
-        return connection;
-    }
     /**
      * Method for creating uniq UUID
      * @return uniq UUID
@@ -124,4 +98,6 @@ public class Utils {
     public String createUUID() {
         return UUID.randomUUID().toString();
     }
+
+
 }
