@@ -8,7 +8,7 @@ import ru.coffee.repository.TransactionRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionRepositoryImpl implements TransactionRepository {
+public class TransactionRepositoryLocal implements TransactionRepository {
 
     private final Logger logger = LogManager.getLogger(TransactionRepository.class.getName());
     private final List<String> transactionList = new ArrayList<>();

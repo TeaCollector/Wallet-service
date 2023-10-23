@@ -2,7 +2,6 @@ package ru.coffee.repository.impl;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import ru.coffee.domain.User;
 import ru.coffee.exception.NotEnoughMoneyException;
@@ -16,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-class UserRepositoryImplTest {
+class UserRepositoryLocalTest {
     @Mock
-    UserRepositoryImpl userRepository;
+    UserRepositoryLocal userRepository;
 
     private static List<User> mockUserList = mock(ArrayList.class);
     private static List<String> mockTransactionIdList = mock(ArrayList.class);

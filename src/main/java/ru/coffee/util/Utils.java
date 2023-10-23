@@ -1,5 +1,12 @@
 package ru.coffee.util;
 
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.coffee.domain.User;
@@ -8,15 +15,21 @@ import ru.coffee.out.OutputStream;
 import ru.coffee.service.UserService;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.UUID;
 
 
 /**
  * Util class for additional action with user
  */
+
 public class Utils {
     private final UserService userService;
     private final OutputStream<String> output;
@@ -76,6 +89,34 @@ public class Utils {
         return Optional.of(userService.findUser(userForChecking).get());
     }
 
+    public Connection getConnection() throws LiquibaseException {
+        Properties properties = new Properties();
+        try (FileInputStream in = new FileInputStream("src/main/resources/db/db.properties")) {
+            properties.load(in);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String url = properties.getProperty("postgres.url");
+        String username = properties.getProperty("postgres.username");
+        String password = properties.getProperty("postgres.password");
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Database database = null;
+        try {
+            database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+        } catch (DatabaseException e) {
+            throw new RuntimeException(e);
+        }
+        Liquibase liquibase = new Liquibase("db/changelog/changelog-master.xml",
+                new ClassLoaderResourceAccessor(), database);
+        liquibase.dropAll();
+        liquibase.update("");
+        return connection;
+    }
     /**
      * Method for creating uniq UUID
      * @return uniq UUID

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import ru.coffee.domain.OperationDetail;
 import ru.coffee.domain.User;
 import ru.coffee.exception.NotEnoughMoneyException;
-import ru.coffee.exception.NotUniqTransactionException;
 import ru.coffee.out.OutputStream;
 import ru.coffee.repository.UserRepository;
 
@@ -17,14 +16,14 @@ import java.util.*;
 /**
  * User repository implementation
  */
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryLocal implements UserRepository {
 
-    private final Logger logger = LogManager.getLogger(UserRepositoryImpl.class.getName());
+    private final Logger logger = LogManager.getLogger(UserRepositoryLocal.class.getName());
     private final OutputStream<String> output;
     private final List<User> userList = new ArrayList<>();
     private final Map<User, List<OperationDetail>> operationDetailList = new HashMap<>();
 
-    public UserRepositoryImpl(OutputStream<String> output) {
+    public UserRepositoryLocal(OutputStream<String> output) {
         this.output = output;
     }
 

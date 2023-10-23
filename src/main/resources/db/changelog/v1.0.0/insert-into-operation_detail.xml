@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="007-insert-into-operation_detail" author="Alexandr_Sergeev">
+        <insert tableName="operation_detail"
+                schemaName="wallet">
+            <column name="operation_id" value="1"/>
+            <column name="operation_time" value="13:45:30"/>
+            <column name="action" value="-300"/>
+        </insert>
+
+        <insert tableName="operation_detail"
+                schemaName="wallet">
+            <column name="operation_id" value="2"/>
+            <column name="operation_time" value="22:45:05"/>
+            <column name="action" value="136"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

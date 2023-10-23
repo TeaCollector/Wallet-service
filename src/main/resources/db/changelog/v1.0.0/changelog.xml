@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <include file="/create-schema-wallet.xml" relativeToChangelogFile="true"/>
+    <include file="/create-table-user.xml" relativeToChangelogFile="true"/>
+    <include file="/create-table-transaction.xml" relativeToChangelogFile="true"/>
+    <include file="/create-table-operation_detail.xml" relativeToChangelogFile="true"/>
+    <include file="/create-sequence.xml" relativeToChangelogFile="true"/>
+    <include file="/insert-into-operation_detail.xml" relativeToChangelogFile="true"/>
+    <include file="/insert-into-user.xml" relativeToChangelogFile="true"/>
+    <include file="/insert-into-transaction.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

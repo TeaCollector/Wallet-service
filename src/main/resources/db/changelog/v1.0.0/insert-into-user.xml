@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="006-insert-into-user" author="Alexandr_Sergeev">
+<!--        <sql>INSERT INTO wallet.user (user_id, username, password, email, operation_id, account)-->
+<!--             VALUES (nextval('wallet.seq_id'), 'dasha', 'dasha', 'dasha@mail.com', 1, 450.45);-->
+<!--        </sql>-->
+
+
+        <insert tableName="user"
+                schemaName="wallet">
+            <column name="user_id" value="1"/>
+            <column name="username" value="sasha"/>
+            <column name="password" value="sasha"/>
+            <column name="email" value="sasha@mail.com"/>
+            <column name="operation_id" value="1"/>
+            <column name="account" value="400.14"/>
+        </insert>
+
+        <insert tableName="user"
+                schemaName="wallet">
+            <column name="user_id" value="2"/>
+            <column name="username" value="konny"/>
+            <column name="password" value="konny"/>
+            <column name="email" value="konny@mail.com"/>
+            <column name="operation_id" value="2"/>
+            <column name="account" value="350.45"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

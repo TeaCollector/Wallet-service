@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="004-create-table-operation_detail" author="Alexandr_Sergeev">
+        <createTable tableName="operation_detail"
+                     schemaName="wallet">
+            <column name="operation_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="operation_time" type="VARCHAR(10)"/>
+            <column name="action" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                referencedTableSchemaName="wallet"
+                baseTableName="user"
+                baseColumnNames="operation_id"
+                constraintName="fk_operation_id"
+                referencedTableName="operation_detail"
+                referencedColumnNames="operation_id"/>
+    </changeSet>
+
+</databaseChangeLog>
