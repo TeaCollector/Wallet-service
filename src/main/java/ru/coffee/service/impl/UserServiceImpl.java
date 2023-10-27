@@ -10,31 +10,32 @@ import ru.coffee.service.UserService;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService<User> {
 
-    private UserRepository userRepository;
+    private UserRepository<User> userRepository;
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class.getName());
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository<User> userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         logger.info("Adding {}", user.getName());
-        userRepository.addUser(user);
+        return userRepository.addUser(user);
     }
 
     @Override
-    public void addMoney(User user, BigDecimal money) throws UserNotFoundException {
+    public User addMoney(User user, BigDecimal money) {
         logger.info("Adding money for {} amount {}", user.getName(), money);
-        userRepository.addMoney(user, money);
+        return userRepository.addMoney(user, money);
+
     }
 
     @Override
-    public void withdraw(User user, BigDecimal money) throws UserNotFoundException {
+    public User withdraw(User user, BigDecimal money) {
         logger.info("Withdraw money for {} amount {}", user.getName(), money);
-        userRepository.withdraw(user, money);
+        return userRepository.withdraw(user, money);
     }
 
     @Override

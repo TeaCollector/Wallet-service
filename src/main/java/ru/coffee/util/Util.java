@@ -17,12 +17,15 @@ import java.util.UUID;
 /**
  * Util class for additional action with user
  */
-public class Utils {
-    private final UserService userService;
-    private final OutputStream<String> output;
-    private static final Logger logger = LogManager.getLogger(Utils.class.getName());
 
-    public Utils(UserService userService, OutputStream<String> output) {
+public class Util {
+
+    private final UserService<User> userService;
+    private final OutputStream<String> output;
+    private static final Logger logger = LogManager.getLogger(Util.class.getName());
+
+
+    public Util(UserService<User> userService, OutputStream<String> output) {
         this.userService = userService;
         this.output = output;
     }
@@ -83,4 +86,6 @@ public class Utils {
     public String createUUID() {
         return UUID.randomUUID().toString();
     }
+
+
 }

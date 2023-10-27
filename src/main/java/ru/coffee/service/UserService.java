@@ -10,13 +10,13 @@ import java.util.Optional;
  * Service with base action for repository.
  */
 
-public interface UserService {
+public interface UserService<T> {
 
-    void addUser(User user);
+    T addUser(User user);
 
-    void addMoney(User user, BigDecimal money) throws UserNotFoundException;
+    T addMoney(User user, BigDecimal money);
 
-    void withdraw(User user, BigDecimal money) throws UserNotFoundException;
+    T withdraw(User user, BigDecimal money);
 
     Optional<User> findUser(User user);
 

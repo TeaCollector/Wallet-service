@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     private String name;
     private String password;

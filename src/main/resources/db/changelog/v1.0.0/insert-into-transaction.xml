@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="008-insert-into-transaction" author="Alexandr_Sergeev">
+        <insert tableName="transaction"
+                schemaName="wallet">
+            <column name="transaction_id" value="1"/>
+            <column name="transaction" value="2345-dfg-23g"/>
+        </insert>
+        <insert tableName="transaction"
+                schemaName="wallet">
+            <column name="transaction_id" value="2"/>
+            <column name="transaction" value="dfsd-45gh-234t"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
