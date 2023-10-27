@@ -51,12 +51,7 @@ public class UserServiceImplTest {
     @SneakyThrows
     @Test
     void AddMoney_CorrectInputData_Success() {
-        try {
-            doThrow(UserNotFoundException.class).when(userService).addMoney(any(), any());
-
-        } catch (UserNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            doNothing().when(userService).addMoney(any(), any());
     }
 
     @Test

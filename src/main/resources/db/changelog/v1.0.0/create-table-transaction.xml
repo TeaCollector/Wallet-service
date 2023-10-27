@@ -5,6 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
     <changeSet id="003-create-table-transaction" author="Alexandr_Sergeev">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="transaction"
+                             schemaName="wallet"/>
+            </not>
+        </preConditions>
         <createTable tableName="transaction"
                      schemaName="wallet">
             <column name="transaction_id" type="BIGINT">

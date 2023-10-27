@@ -1,83 +1,89 @@
 package ru.coffee.repository.impl;
 
-import liquibase.Liquibase;
-import liquibase.database.Database;
-import liquibase.database.DatabaseFactory;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
-import liquibase.resource.ClassLoaderResourceAccessor;
+import ru.coffee.config.DBConnectionProvider;
 import ru.coffee.domain.User;
-import ru.coffee.exception.UserNotFoundException;
+import ru.coffee.exception.NotEnoughMoneyException;
+import ru.coffee.out.OutputStream;
 import ru.coffee.repository.UserRepository;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-import java.util.Properties;
 
-public class UserRepositoryBD implements UserRepository {
+public class UserRepositoryBD implements UserRepository<User> {
+    private DBConnectionProvider provider;
+    private OutputStream<String> output;
 
-    private Connection connection;
-
-    public UserRepositoryBD() {
-        try {
-            getConnectionAndLiquibase();
-            connection = getConnection();
-        } catch (LiquibaseException e) {
-            throw new RuntimeException(e);
-        }
+    public UserRepositoryBD(OutputStream<String> output, DBConnectionProvider provider) {
+        this.output = output;
+        this.provider = provider;
     }
 
     @Override
-    public void addUser(User user) {
-        try {
+    public User addUser(User user) {
+        String sqlInsertInToOperationId =
+                "INSERT INTO wallet.operation_detail (operation_id, operation_time, action)" +
+                "VALUES (nextval('wallet.seq_operation_detail_id'), ?, ?)";
+        try (Connection connection = provider.getConnection()) {
+            connection.setAutoCommit(false);
             String registration = "Registration";
             String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-            String sqlInsertInToOperationId =
-                    "INSERT INTO wallet.operation_detail (operation_id, operation_time, action)" +
-                    "VALUES (nextval('wallet.seq_operation_detail_id'), ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sqlInsertInToOperationId);
             statement.setString(1, currentTime);
             statement.setString(2, registration);
             statement.executeUpdate();
             String sql =
-                    "INSERT INTO wallet_db.wallet.user (user_id, username, password, operation_id, amount) " +
-                    "VALUES (nextval('wallet.seq_user_id'), ?, ?, currval('wallet.seq_operation_detail_id'), 10000.00)";
+                    "INSERT INTO wallet.user (user_id, username, password, amount) " +
+                    "VALUES (nextval('wallet.seq_user_id'), ?, ?, 10000.00)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql);
-            System.out.println("USER WAS CREATED AT METHOD");
-            System.out.println("\npassword: " + user.getPassword());
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+            connection.commit();
+        } catch (SQLException | LiquibaseException e) {
             throw new RuntimeException(e);
         }
+        return user;
     }
 
     @Override
-    public void withdraw(User user, BigDecimal money) throws UserNotFoundException {
-
-    }
-
-    @Override
-    public void addMoney(User user, BigDecimal money) throws UserNotFoundException {
-        try {
-            String sql = "UPDATE wallet.user " +
+    public User addMoney(User user, BigDecimal money) {
+        try (Connection connection = provider.getConnection()) {
+            connection.setAutoCommit(false);
+            saveOperationDetail(user, money, connection);
+            String sql = "UPDATE wallet.user AS u " +
                          "SET amount = amount + ? " +
-                         "WHERE wallet.user.username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, new BigDecimal(money));
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
+                         "WHERE u.username = ?";
+            addOrWithdrawMoney(user, money, sql, connection);
+            connection.commit();
+        } catch (SQLException | LiquibaseException e) {
             throw new RuntimeException(e);
         }
+        return user;
+    }
+
+    @Override
+    public User withdraw(User user, BigDecimal money) {
+        try (Connection connection = provider.getConnection()) {
+            if (user.getBalance().doubleValue() < Math.abs(money.doubleValue())) {
+                throw new NotEnoughMoneyException("Not enough money at your amount");
+            }
+            connection.setAutoCommit(false);
+            saveOperationDetail(user, money, connection);
+            String sql = "UPDATE wallet.user AS u " +
+                         "SET amount = amount - abs(?) " +
+                         "WHERE u.username = ?";
+            addOrWithdrawMoney(user, money, sql, connection);
+            connection.commit();
+        } catch (SQLException | NotEnoughMoneyException | LiquibaseException e) {
+            output.output(e.getMessage());
+        }
+        return user;
+
     }
 
     @Override
@@ -85,87 +91,87 @@ public class UserRepositoryBD implements UserRepository {
         String sql = "SELECT u.username, u.password, u.amount " +
                      "FROM wallet.user u " +
                      "WHERE u.username = ? " +
-                     "AND u.username = ?";
-        try {
+                     "AND u.password = ?";
+        try (Connection connection = provider.getConnection()) {
+            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
-            User userFromTable = new User();
+            User userFromTable = null;
             if (resultSet.next()) {
+                userFromTable = new User();
                 userFromTable.setName(resultSet.getString("username"));
                 userFromTable.setPassword(resultSet.getString("password"));
                 userFromTable.setBalance(new BigDecimal(resultSet.getString("amount")));
+                connection.commit();
+                return Optional.of(userFromTable);
             }
-            return Optional.of(userFromTable);
-        } catch (SQLException e) {
+            return Optional.empty();
+        } catch (SQLException | LiquibaseException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public void history(User user) {
-    }
-
-    @Override
-    public String currentAmount(User user) {
-        try {
-            String sql = "SELECT amount FROM wallet.user WHERE username = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        String sqlHistory = "SELECT wu.username, wo.action " +
+                            "FROM wallet.user wu " +
+                            "JOIN wallet.operation_detail wo " +
+                            "ON wu.user_id = wo.user_id " +
+                            "WHERE wu.username = ?";
+        try (Connection connection = provider.getConnection()) {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlHistory);
             preparedStatement.setString(1, user.getName());
-            ResultSet result = preparedStatement.executeQuery();
-            return result.getString("amount");
-        } catch (SQLException e) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                output.output(resultSet.getString("username") + ": " +
+                              resultSet.getString("action" + "\n"));
+            }
+            connection.commit();
+        } catch (SQLException | LiquibaseException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Connection getConnection() throws LiquibaseException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream("src/main/resources/db/db.properties")) {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private void saveOperationDetail(User user, BigDecimal money, Connection connection) throws SQLException {
+        String sqlFindUser = "SELECT u.user_id " +
+                             "FROM wallet.user u " +
+                             "WHERE u.username = ?";
+        PreparedStatement findOperationId = connection.prepareStatement(sqlFindUser);
+        findOperationId.setString(1, user.getName());
+        ResultSet resultSet = findOperationId.executeQuery();
+
+        int userId = 0;
+        if (resultSet.next()) {
+            userId = resultSet.getInt("user_id");
         }
-        String url = properties.getProperty("postgres.url");
-        String username = properties.getProperty("postgres.username");
-        String password = properties.getProperty("postgres.password");
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
+
+        String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        String sqlSaveOperation = "INSERT INTO wallet.operation_detail (operation_id, operation_time, action, user_id) " +
+                                  "VALUES (nextval('wallet.seq_operation_detail_id'), ?, ?, ?)";
+        PreparedStatement saveOperation = connection.prepareStatement(sqlSaveOperation);
+        saveOperation.setString(1, currentTime);
+        saveOperation.setBigDecimal(2, money);
+        saveOperation.setInt(3, userId);
+        saveOperation.executeUpdate();
     }
 
-    public Connection getConnectionAndLiquibase() throws LiquibaseException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream("src/main/resources/db/db.properties")) {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private void addOrWithdrawMoney(User user, BigDecimal money, String sql, Connection connection) throws SQLException {
+        String selectAmount = "SELECT u.amount " +
+                              "FROM wallet.user u " +
+                              "WHERE u.username = ?";
+        ResultSet resultSet;
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBigDecimal(1, money);
+        preparedStatement.setString(2, user.getName());
+        preparedStatement.executeUpdate();
+        PreparedStatement updatedUser = connection.prepareStatement(selectAmount);
+        updatedUser.setString(1, user.getName());
+        resultSet = updatedUser.executeQuery();
+        if (resultSet.next()) {
+            user.setBalance(new BigDecimal(resultSet.getString("amount")));
         }
-        String url = properties.getProperty("postgres.url");
-        String username = properties.getProperty("postgres.username");
-        String password = properties.getProperty("postgres.password");
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        Database database = null;
-        try {
-            database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
-        } catch (DatabaseException e) {
-            throw new RuntimeException(e);
-        }
-        Liquibase liquibase = new Liquibase("db/changelog/changelog-master.xml",
-                new ClassLoaderResourceAccessor(), database);
-        liquibase.dropAll();
-        liquibase.update();
-        return connection;
     }
-
 }

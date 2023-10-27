@@ -23,7 +23,7 @@ import java.util.Optional;
 public class ConsoleController {
 
     private final TransactionService transactionService;
-    private final UserService userService;
+    private final UserService<User> userService;
     private final InputStream<BufferedReader> input;
     private final OutputStream<String> output;
     private final Util util;
@@ -36,7 +36,7 @@ public class ConsoleController {
      * @param output             output stream output to console
      * @param util              additional tool for authentication and create user
      */
-    public ConsoleController(TransactionService transactionService, UserService userService,
+    public ConsoleController(TransactionService transactionService, UserService<User> userService,
                              InputStream<BufferedReader> input,
                              OutputStream<String> output,
                              Util util) {
@@ -53,7 +53,7 @@ public class ConsoleController {
      * @throws IOException
      * @throws UserNotFoundException
      */
-    public void run() throws IOException, UserNotFoundException {
+    public void run() throws IOException {
         output.output("\nWelcome to our application.\nSign up input: '1' for sign in input: '2': ");
         try (BufferedReader br = input.input()) {
             User user = new User();
@@ -98,7 +98,7 @@ public class ConsoleController {
      * @throws IOException
      * @throws UserNotFoundException
      */
-    private void usersAction(BufferedReader br, User user) throws IOException, UserNotFoundException {
+    private void usersAction(BufferedReader br, User user) throws IOException {
         while (true) {
             output.output("Input here: ");
             String action = br.readLine();
@@ -107,14 +107,14 @@ public class ConsoleController {
                 if (transactionService.validTransaction(transactionId)) {
                     transactionService.addTransaction(transactionId);
                 } else continue;
-                userService.addMoney(user, new BigDecimal(action));
+                user = userService.addMoney(user, new BigDecimal(action).setScale(4, RoundingMode.CEILING));
                 output.output("\nYour balance: " + user.getBalance().setScale(4, RoundingMode.CEILING) + "\n");
             } else if (action.charAt(0) == '-') {
                 String transactionId = util.createUUID();
                 if (transactionService.validTransaction(transactionId)) {
                     transactionService.addTransaction(transactionId);
                 } else continue;
-                userService.withdraw(user, new BigDecimal(action));
+                user = userService.withdraw(user, new BigDecimal(action));
                 output.output("\nYour balance: " + user.getBalance().setScale(4, RoundingMode.CEILING) + "\n");
             } else if (action.equals("history")) {
                 userService.history(user);

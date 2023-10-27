@@ -1,12 +1,5 @@
 package ru.coffee.util;
 
-import liquibase.Liquibase;
-import liquibase.database.Database;
-import liquibase.database.DatabaseFactory;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.DatabaseException;
-import liquibase.exception.LiquibaseException;
-import liquibase.resource.ClassLoaderResourceAccessor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.coffee.domain.User;
@@ -15,14 +8,9 @@ import ru.coffee.out.OutputStream;
 import ru.coffee.service.UserService;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.UUID;
 
 
@@ -32,12 +20,12 @@ import java.util.UUID;
 
 public class Util {
 
-    private final UserService userService;
+    private final UserService<User> userService;
     private final OutputStream<String> output;
     private static final Logger logger = LogManager.getLogger(Util.class.getName());
 
 
-    public Util(UserService userService, OutputStream<String> output) {
+    public Util(UserService<User> userService, OutputStream<String> output) {
         this.userService = userService;
         this.output = output;
     }

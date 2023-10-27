@@ -1,21 +1,18 @@
 package ru.coffee.repository.impl;
 
 import liquibase.exception.LiquibaseException;
+import ru.coffee.config.DBConnectionProvider;
 import ru.coffee.repository.TransactionRepository;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 public class TransactionRepositoryBD implements TransactionRepository {
 
-
     private Connection connection;
 
-    public TransactionRepositoryBD() {
+    public TransactionRepositoryBD(DBConnectionProvider provider) {
         try {
-            connection = getConnection();
+            connection = provider.getConnection();
         } catch (LiquibaseException e) {
             throw new RuntimeException(e);
         }
@@ -50,24 +47,5 @@ public class TransactionRepositoryBD implements TransactionRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Connection getConnection() throws LiquibaseException {
-        Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream("src/main/resources/db/db.properties")) {
-            properties.load(in);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String url = properties.getProperty("postgres.url");
-        String username = properties.getProperty("postgres.username");
-        String password = properties.getProperty("postgres.password");
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return connection;
     }
 }

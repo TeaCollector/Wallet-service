@@ -10,6 +10,7 @@
             <column name="operation_id" value="1"/>
             <column name="operation_time" value="13:45:30"/>
             <column name="action" value="Registration"/>
+            <column name="user_id" value="1"/>
         </insert>
 
         <insert tableName="operation_detail"
@@ -17,6 +18,7 @@
             <column name="operation_id" value="2"/>
             <column name="operation_time" value="22:45:05"/>
             <column name="action" value="Registration"/>
+            <column name="user_id" value="2"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

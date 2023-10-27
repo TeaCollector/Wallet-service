@@ -11,8 +11,7 @@
             <column name="user_id" value="1"/>
             <column name="username" value="sasha"/>
             <column name="password" value="sasha"/>
-            <column name="operation_id" value="1"/>
-            <column name="amount" value="400.14"/>
+            <column name="amount" value="400.00"/>
         </insert>
 
         <insert tableName="user"
@@ -20,8 +19,7 @@
             <column name="user_id" value="2"/>
             <column name="username" value="konny"/>
             <column name="password" value="konny"/>
-            <column name="operation_id" value="2"/>
-            <column name="amount" value="350.45"/>
+            <column name="amount" value="350.57"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

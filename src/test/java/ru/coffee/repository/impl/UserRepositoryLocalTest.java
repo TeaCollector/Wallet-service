@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 class UserRepositoryLocalTest {
     @Mock
-    UserRepositoryLocal userRepository;
+    UserRepositoryBD userRepository;
 
     private static List<User> mockUserList = mock(ArrayList.class);
     private static List<String> mockTransactionIdList = mock(ArrayList.class);
